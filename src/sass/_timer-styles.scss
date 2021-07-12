@@ -1,0 +1,36 @@
+input{
+    padding: 10px 32px;
+  margin: 10px;
+  border-radius: 4px;
+  min-width: 200px;
+
+  border: 1px solid black;
+}
+
+.timer{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.field{
+    margin: 10px;
+    padding: 10px;
+    background-color:black;
+}
+
+.value{
+    color: white;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.label{
+    color: white;
+    font-size:20px;
+    font-weight: bold;
+}
+
+
+
+
