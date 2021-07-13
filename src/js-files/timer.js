@@ -11,6 +11,8 @@
 // Таймер должен останавливаться когда дошел до конечной даты, то есть 00:00:00:00.
 // Для подсчета значений используй готовую функцию, где ms - разница между конечной и текущей датой в миллисекундах.
 
+import Swal from 'sweetalert2';
+
 const refs = {
     inputData: document.getElementById('date-selector'),
     startButton: document.querySelector('.timer-button'),
@@ -22,9 +24,6 @@ const refs = {
     dataSeconds: document.querySelector('[data-seconds]'),
   
 }
-
-
-
 
 class Timer  {
     constructor({ onTick }){
@@ -45,14 +44,25 @@ class Timer  {
             const inputDate = enteredDate.getTime();
             const currentDate = new Date();
 
-
             const ms = inputDate - currentDate;
             const time = this.convertMs(ms);
 
             this.onTick(time);
 
+            if (ms < 1000) {
+                timer.stop();
+            }
+
+            if (enteredDate < currentDate) {
+                Swal.fire('Please choose a date in the future')
+               }
+
         }, 1000);
 
+    }
+
+    stop() {
+        clearInterval(this.intervalID);
     }
 
      pad(value){
@@ -83,6 +93,7 @@ class Timer  {
 
 const timer = new Timer({
     onTick: changeTimerNumbers,
+    
 });
 
 function changeTimerNumbers({ days, hours, minutes, seconds }) {
@@ -100,19 +111,10 @@ function changeTimerNumbers({ days, hours, minutes, seconds }) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 // function getUserInputTime() {
 //    const enteredDate = document.getElementById('date-selector').value;
 //     return enteredDate;
 //     console.log(enteredDate); 
 // }
+
+
